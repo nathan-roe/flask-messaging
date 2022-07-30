@@ -2,6 +2,7 @@ from flask import Response, request
 from flask_restful import Resource, marshal_with
 from models.userprofile import UserProfile
 from models.message import message_fields
+from models.messagegroup import user_message_rel_fields
 from service.authentication import token_to_userprofile
 from controller.messagecontroller import retrieve_messages, send_message, \
     send_message_request, update_message_request
@@ -9,6 +10,7 @@ from controller.messagecontroller import retrieve_messages, send_message, \
 
 class SendMessageRequest(Resource):
 
+    @marshal_with(user_message_rel_fields)
     def post(self, id):
         try:
             cur_user = token_to_userprofile(request)
@@ -59,6 +61,7 @@ class MessageRequests(Resource):
         except ValueError:
             return Response(status=400)
 
+    @marshal_with(message_fields)
     def post(self, id):
         try:
             request_data = request.get_json()
@@ -66,7 +69,7 @@ class MessageRequests(Resource):
             cur_user = token_to_userprofile(request)
             user = UserProfile.query.filter(UserProfile.id == id).first()
 
-            send_message(cur_user, user, message)
-            return Response(status=200)
+            message = send_message(cur_user, user, message)
+            return message, 200
         except ValueError:
             return Response(status=400)

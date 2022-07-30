@@ -13,15 +13,15 @@ class UserMessageRelationship(db.Model):
     contact_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     contact = db.relationship('UserProfile', backref=db.backref('contact_message_rel'), foreign_keys=[contact_id])
 
-    status = db.Column(ChoiceType(Constants.MessageRelConstants))
+    connection_status = db.Column(ChoiceType(Constants.MessageRelConstants))
 
 
-    def __init__(self, owner, contact, status = Constants.MessageRelConstants.REQUESTED):
+    def __init__(self, owner, contact, connection_status = Constants.MessageRelConstants.REQUESTED):
         self.owner_id = owner.id
         self.owner = owner
         self.contact_id = contact.id
         self.contact = contact
-        self.status = status
+        self.connection_status = connection_status
 
     def __repr__(self):
         return f'Owner: {self.owner} | Contact: {self.contact}'
@@ -31,5 +31,5 @@ user_message_rel_fields = {
     'id': fields.Integer,
     'owner_id': fields.Integer,
     'contact_id': fields.Integer,
-    'status': fields.Integer
+    'connection_status': fields.String
 }

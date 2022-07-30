@@ -48,6 +48,8 @@ def send_message(cur_user, receiver, message):
     db.session.add(message)
     db.session.commit()
 
+    return message
+
 
 def retrieve_messages(cur_user, receiver):
     message_rel = get_related_message_group(cur_user, receiver).first()
