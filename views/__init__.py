@@ -1,2 +1,3 @@
-from views.messageviews import SendMessageRequest
 from views.userviews import SignUp, VerifyEmail, ResendVerifyEmail, SignIn
+from views.messageviews import MessageRequests, AcceptMessageRequest, \
+    DeclineMessageRequest, MessageRequestsRequest

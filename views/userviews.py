@@ -14,15 +14,13 @@ class SignUp(Resource):
     @marshal_with(user_fields)
     def post(self):
         try:
-
             args = user_parser.parse_args()
             user = create_user(args.name_first, args.name_last, args.email, args.password)
             token = create_token(user)
             mock_email_token(token)
-            return user
-
+            return user, 200
         except ValueError:
-            return Response(status=400, mimetype='application/json')
+            return Response(status=400)
 
 
 class VerifyEmail(Resource):
@@ -34,13 +32,12 @@ class VerifyEmail(Resource):
 
             verify_email(token)
 
-            return Response(status=200, mimetype='application/json')
+            return Response(status=200)
         except PermissionError:
-            return Response("{'message': 'This token has expired. Please resend the verification email'}",
-                            status=401,
-                            mimetype='application/json')
+            data = {'message': 'This token has expired. Please resend the verification email'}
+            return data, 401
         except ValueError:
-            return Response(status=400, mimetype='application/json')
+            return Response(status=400)
 
 
 
@@ -54,9 +51,9 @@ class ResendVerifyEmail(Resource):
             token = create_token(user, reset=True)
             mock_email_token(token)
 
-            return Response(status=200, mimetype='application/json')
+            return Response(status=200)
         except ValueError:
-            return Response(status=400, mimetype='application/json')
+            return Response(status=400)
 
 
 
@@ -91,8 +88,7 @@ class SignIn(Resource):
 
                 token = update_access_token(cur_user, prev_token, access_log)
 
-                data = {'token': token.token_key}
-                return Response(str(data), status=200, mimetype='application/json')
+                return {'token': token.token_key}, 200
 
 
             # thirty_minutes_ago = timezone.now() - datetime.timedelta(minutes=30)
@@ -111,6 +107,5 @@ class SignIn(Resource):
 
             # If user email is not verified
             return Response(status=401)
-        except Exception as e:
-            print(e)
-            return Response(status=400, mimetype='application/json')
+        except ValueError:
+            return Response(status=400)
