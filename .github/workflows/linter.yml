@@ -34,7 +34,7 @@ jobs:
       - name: Run Linter
         run: |
           shopt -s extglob
-          pylint --rcfile=.pylintrc ./!(*.txt|*.md|*.bat|*.dat|*.dir|*.js)
+          pylint --rcfile=.pylintrc ./!(*.txt|*.md|*.bat|*.dat|*.dir|*.json)
         env:
           ENGINE: aaaa
           NAME: aaaa
