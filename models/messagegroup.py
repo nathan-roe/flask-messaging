@@ -14,7 +14,7 @@ class UserMessageRelationship(db.Model):
     contact = db.relationship('UserProfile', backref=db.backref('contact_message_rel'), foreign_keys=[contact_id])
 
     status = db.Column(ChoiceType(Constants.MessageRelConstants))
-    
+
 
     def __init__(self, owner, contact, status = Constants.MessageRelConstants.REQUESTED):
         self.owner_id = owner.id

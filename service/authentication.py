@@ -8,13 +8,14 @@ def token_to_userprofile(request):
     # Assigning UserProfile object associated with authenticated Token
     # get token straight from headers
     try:
-        print(request.META)
-        tok = request.META.get('HTTP_AUTHORIZATION').split()
-        cur_token = ExpiringToken.filter(token_key=tok[1])
-        has_expired = ExpiringToken.expired(cur_token)
+        print(request.headers)
+        tok = request.headers.get('Authorization').split()
+        cur_token = ExpiringToken.query.filter(ExpiringToken.token_key == tok[1]).first()
+        has_expired = cur_token.expired()
         if not has_expired:
             return cur_token.user
         else:
             return
-    except:
+    except Exception as e:
+        print(e)
         return
