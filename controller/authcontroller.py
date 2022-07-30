@@ -31,7 +31,7 @@ def verify_email(token):
     token_instance = ExpiringToken.query.filter(ExpiringToken.user == cur_user).first()
     if token_instance.expired():
         db.session.delete(token_instance)
-        raise PermissionError(f'The current token has expired.')
+        raise PermissionError('The current token has expired.')
     
     cur_user.email_verified = True
     db.session.add(cur_user)

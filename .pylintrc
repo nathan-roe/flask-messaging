@@ -191,8 +191,12 @@ disable=print-statement,
       raise-missing-from,
       useless-object-inheritance,
       unnecessary-pass,
-      pointless-statement, # being called in admin files 
-      trailing-comma-tuple # being called in admin files
+      wildcard-import, unused-wildcard-import, # Called in config
+      redefined-outer-name, # Improperly called on model instantiation
+      abstract-method, # Improperly called on custom types
+      singleton-comparison # Improperly called on SQLAlchemy queries
+
+
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
