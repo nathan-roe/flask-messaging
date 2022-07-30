@@ -23,4 +23,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'{get_env("ENGINE")}://{get_env("USER")
     f'{get_env("PASSWORD")}@{get_env("HOST")}:{get_env("PORT")}/{get_env("NAME")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
+# Initialize database session.
 db = SQLAlchemy(app)

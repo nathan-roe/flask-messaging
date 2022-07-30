@@ -1,0 +1,44 @@
+name: Lint code on PR
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Check For Linting Errors
+    runs-on: ubuntu-latest
+
+    steps:
+      #check out repository
+      - uses: actions/checkout@v3
+      
+      #set up Python
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Get Pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name : Download dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Get pylint
+        run: |
+          pip install pylint==2.10.2
+
+      - name: Run Linter
+        run: |
+          shopt -s extglob
+          pylint --load-plugins --rcfile=.pylintrc ./!(*.txt|*.md|*.bat|*.dat|*.dir)
+        env:
+          ENGINE: aaaa
+          NAME: aaaa
+          HOST: aaaa
+          USER: aaaa
+          PASSWORD: aaaa
+          PORT: aaaa
