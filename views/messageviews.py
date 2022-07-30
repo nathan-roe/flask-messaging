@@ -4,7 +4,7 @@ from models.userprofile import UserProfile
 from models.message import message_fields
 from models.messagegroup import user_message_rel_fields
 from service.authentication import token_to_userprofile
-from controller.messagecontroller import retrieve_messages, send_message, \
+from controller.messagecontroller import get_all_related_message_groups, retrieve_messages, send_message, \
     send_message_request, update_message_request
 
 
@@ -71,5 +71,18 @@ class MessageRequests(Resource):
 
             message = send_message(cur_user, user, message)
             return message, 200
+        except ValueError:
+            return Response(status=400)
+
+
+class MessageGroups(Resource):
+
+    @marshal_with(user_message_rel_fields)
+    def get(self):
+        try:
+            cur_user = token_to_userprofile(request)
+
+            message_rel = get_all_related_message_groups(cur_user)
+            return message_rel, 200
         except ValueError:
             return Response(status=400)

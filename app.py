@@ -1,9 +1,9 @@
-from config import configure
 from flask_restful import Api
-from views import SendMessageRequest, ResendVerifyEmail, SignUp, \
-    VerifyEmail, SignIn, AcceptMessageRequest, DeclineMessageRequest
 from database import app
-from views.messageviews import MessageRequests
+from config import configure
+from views import SendMessageRequest, ResendVerifyEmail, SignUp, \
+    VerifyEmail, SignIn, AcceptMessageRequest, DeclineMessageRequest, \
+    MessageGroups, MessageRequests
 
 
 api = Api(app)
@@ -21,6 +21,7 @@ api.add_resource(SendMessageRequest,'/messages/request/<int:id>')
 api.add_resource(AcceptMessageRequest,'/messages/accept/<int:id>')
 api.add_resource(DeclineMessageRequest,'/messages/decline/<int:id>')
 api.add_resource(MessageRequests,'/messages/<int:id>')
+api.add_resource(MessageGroups,'/messages/groups')
 
 
 if __name__ == '__main__':
