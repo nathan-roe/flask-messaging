@@ -1,6 +1,6 @@
 # Flask Messaging
 
-This is a messaging API written using Python, Flask, SQLAlchemy and Flask-RESTful.
+This is a messaging API written using Python, Flask, SQLAlchemy, Flask-RESTful, and PostgreSQL.
 
 ### Endpoints
 
@@ -103,4 +103,18 @@ The following code is used within the Sign In endpoint's test to automatically u
 ```javascript
 pm.environment.set('auth_token', pm.response.json().token)
 pm.test(pm.environment.get('auth_token'))
+```
+
+### Setup
+
+The following environment variables are used to interact with a local PostgreSQL database and should be added to a ```.env``` file at the root of the directory:
+```python
+# Database
+ENGINE='postgresql'
+NAME='db_name'
+HOST='localhost'
+
+USER='postgres'
+PASSWORD='postgres_pw'
+PORT=5432
 ```
