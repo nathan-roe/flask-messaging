@@ -191,11 +191,11 @@ disable=print-statement,
       raise-missing-from,
       useless-object-inheritance,
       unnecessary-pass,
-      wildcard-import, # Called in config
+      wildcard-import, unused-wildcard-import, # Called in config
       redefined-outer-name, # Improperly called on model instantiation
       abstract-method, # Improperly called on custom types
       singleton-comparison # Improperly called on SQLAlchemy queries
-      
+
 
 
 # Enable the message, report, category or checker with the given id(s). You can
