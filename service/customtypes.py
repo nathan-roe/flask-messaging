@@ -20,4 +20,7 @@ class ChoiceType(types.TypeDecorator):
             return None
 
     def process_result_value(self, value, dialect):
-        return self.choices[value]
+        try:
+            return [v for v in self.choices.values() if v == value][0]
+        except:
+            return None

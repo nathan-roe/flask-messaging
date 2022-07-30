@@ -30,8 +30,10 @@ class Message(db.Model):
         return f'ID: {self.id} | message: {self.message} | message group: {self.message_group}'
 
 
-user_fields = {
+message_fields = {
     'id': fields.Integer,
     'message': fields.String,
-    'message_group_id': fields.Integer
+    'message_group_id': fields.Integer,
+    'sender_id': fields.Integer,
+    'receiver_id': fields.Integer
 }
