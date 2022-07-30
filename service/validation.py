@@ -1,6 +1,6 @@
 import re
 
-
+# Handles email validation. Used in SignUp view.
 def email(email_str):
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     if re.fullmatch(regex, email_str):
@@ -8,6 +8,7 @@ def email(email_str):
     else:
         raise ValueError(f'{email_str} is not a valid email.')
 
+# Handles password validation. Used in SignUp view.
 def password(password_str):
     regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-/:-@[-`{-~])[A-Za-z\d!-/:-@[-`{-~]{8,}$'
     if re.fullmatch(regex, password_str):

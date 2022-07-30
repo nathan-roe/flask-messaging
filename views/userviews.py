@@ -10,9 +10,20 @@ from service.constants import Constants
 
 
 class SignUp(Resource):
+    """View used to handle sign up."""
 
     @marshal_with(user_fields)
     def post(self):
+        """
+        Creates a user based on post data and sends a verification email.
+        Expected Post Data:
+        {
+            "name_first": str,
+            "name_last": str,
+            "email": str,
+            "password": str
+        }
+        """
         try:
             args = user_parser.parse_args()
             user = create_user(args.name_first, args.name_last, args.email, args.password)
@@ -24,8 +35,15 @@ class SignUp(Resource):
 
 
 class VerifyEmail(Resource):
-
+    """View used to handle email verification as a part of the sign up process."""
     def post(self):
+        """
+        Verifies a user account based on token.
+        Expected Post Data:
+        {
+            "token": str
+        }
+        """
         try:
             request_data = request.get_json()
             token = request_data['token']
@@ -41,8 +59,16 @@ class VerifyEmail(Resource):
 
 
 class ResendVerifyEmail(Resource):
+    """View used to resend a verification email as a part of the sign up process."""
 
     def post(self):
+        """
+        Resended a verification email to the cur_user based on email.
+        Expected Post Data:
+        {
+            "email": str
+        }
+        """
         try:
             request_data = request.get_json()
             email = request_data['email']
@@ -56,8 +82,17 @@ class ResendVerifyEmail(Resource):
 
 
 class SignIn(Resource):
+    """View used to sign in and create an authorization token."""
 
     def post(self):
+        """
+        Signs in the current user provided a valid email and password.
+        Expected Post Data:
+        {
+            "email": str,
+            "password": str
+        }
+        """
         try:
             user_data = request.get_json()
 
@@ -88,7 +123,7 @@ class SignIn(Resource):
 
                 return {'token': token.token_key}, 200
 
-
+            # TODO: Uncomment code and add expiration logic
             # thirty_minutes_ago = timezone.now() - datetime.timedelta(minutes=30)
             # if AccessLog.query.filter(
             #     AccessLog.date_time >= thirty_minutes_ago and AccessLog.attempt_successful is False).count() \

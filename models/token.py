@@ -6,6 +6,8 @@ from models.userprofile import UserProfile
 from service.constants import Constants
 
 class Token(db.Model):
+    """General token used for authentication and authorization."""
+
     __tablename__ = 'tokens'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     token_key = db.Column(db.String(50))

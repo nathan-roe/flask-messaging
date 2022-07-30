@@ -2,6 +2,7 @@ from database import db
 from models.token import ExpiringToken
 from models.userprofile import UserProfile
 
+# Function used to create an expiring token
 def create_token(user, reset = False):
     # Remove previous token(s) if reset is True
     if reset:
@@ -13,10 +14,14 @@ def create_token(user, reset = False):
     db.session.commit()
     return token
 
+
+# Function used to send an email with a verification token. NOTE: Currently mocked and logged to console.
 def mock_email_token(token):
     print(token.token_key)
     return token
 
+
+# Function used to verify an email based on a verification token.
 def verify_email(token):
     cur_user = UserProfile.query.filter(UserProfile.tokens.any(token_key=token)).first()
     
@@ -33,6 +38,8 @@ def verify_email(token):
     db.session.delete(token_instance)
     db.session.commit()
 
+
+# Function used to create a new ExpiringToken as part of the resend verification email process.
 def update_access_token(cur_user, token, access_log):
     if token:
         db.session.delete(token)

@@ -2,6 +2,8 @@ from flask_restful import fields
 from database import db
 
 class Message(db.Model):
+    """Message model to keep track of messages sent within a UserMessageRelationship instance."""
+
     __tablename__ = 'messages'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     message = db.Column(db.String(1000))

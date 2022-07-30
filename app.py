@@ -6,6 +6,7 @@ from views import SendMessageRequest, ResendVerifyEmail, SignUp, \
     MessageGroups, MessageRequests
 
 
+# App configuration.
 api = Api(app)
 configure()
 

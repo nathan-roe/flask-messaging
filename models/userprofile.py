@@ -4,6 +4,8 @@ import bcrypt
 from database import db
 
 class UserProfile(db.Model):
+    """Model used to store user data."""
+
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name_first = db.Column(db.String(50))

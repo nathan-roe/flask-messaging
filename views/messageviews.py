@@ -9,9 +9,14 @@ from controller.messagecontroller import get_all_related_message_groups, retriev
 
 
 class SendMessageRequest(Resource):
+    """View used to send a message request to a user based on id."""
 
     @marshal_with(user_message_rel_fields)
     def post(self, id):
+        """
+        Sends a message request to a user.
+        Expected Post Data: None
+        """
         try:
             cur_user = token_to_userprofile(request)
             user = UserProfile.query.filter(UserProfile.id == id).first()
@@ -26,8 +31,13 @@ class SendMessageRequest(Resource):
 
 
 class AcceptMessageRequest(Resource):
+    """View used to handle accepting a message request based on user id."""
 
     def post(self, id):
+        """
+        Accepts a message request based on user id.
+        Expected Post Data: None
+        """
         try:
             cur_user = token_to_userprofile(request)
             user = UserProfile.query.filter(UserProfile.id == id).first()
@@ -38,8 +48,13 @@ class AcceptMessageRequest(Resource):
 
 
 class DeclineMessageRequest(Resource):
+    """View used to handle declined a message request based on a user id."""
 
     def post(self, id):
+        """
+        Declined a message request based on user id.
+        Expected Post Data: None
+        """
         try:
             cur_user = token_to_userprofile(request)
             user = UserProfile.query.filter(UserProfile.id == id).first()
@@ -50,9 +65,14 @@ class DeclineMessageRequest(Resource):
 
 
 class MessageRequests(Resource):
+    """View used to handle sending and retrieving messages."""
 
     @marshal_with(message_fields)
     def get(self, id):
+        """
+        Returns messages within a UserMessageRelationship based on user id.
+        Expected Params: UserProfile ID
+        """
         try:
             cur_user = token_to_userprofile(request)
             user = UserProfile.query.filter(UserProfile.id == id).first()
@@ -63,6 +83,11 @@ class MessageRequests(Resource):
 
     @marshal_with(message_fields)
     def post(self, id):
+        """
+        Sends a message to a specified user based on user id.
+        Expected Post Data: {"message": str}
+        Expected Params: UserProfile ID
+        """
         try:
             request_data = request.get_json()
             message = request_data['message']
@@ -76,9 +101,14 @@ class MessageRequests(Resource):
 
 
 class MessageGroups(Resource):
+    """View used to handle multiple message groups."""
 
     @marshal_with(user_message_rel_fields)
     def get(self):
+        """
+        Returns all related messages for the cur_user.
+        Expected Params: None
+        """
         try:
             cur_user = token_to_userprofile(request)
 

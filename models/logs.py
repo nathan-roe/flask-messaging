@@ -5,6 +5,8 @@ from service.constants import Constants
 from service.customtypes import ChoiceType
 
 class AccessLog(db.Model):
+    """Model used to keep track of attempts to login or logout of an account."""
+    
     __tablename__ = 'access_log'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 

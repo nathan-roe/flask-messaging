@@ -2,6 +2,7 @@ from sqlalchemy import types
 
 
 class ChoiceType(types.TypeDecorator):
+    """General custom type used as an enum."""
 
     impl = types.String
 

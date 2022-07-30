@@ -4,6 +4,8 @@ from service.constants import Constants
 from service.customtypes import ChoiceType
 
 class UserMessageRelationship(db.Model):
+    """Relates users and keeps track of messages sent."""
+
     __tablename__ = 'user_message_rel'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 

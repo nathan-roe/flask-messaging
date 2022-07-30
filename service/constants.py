@@ -5,6 +5,7 @@ class Constants:
     General constants used for models:
     UserMessageRelationship
     """
+
     class MessageRelConstants:
         REQUESTED = 1
         CONNECTED = 2
