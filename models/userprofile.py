@@ -1,6 +1,5 @@
 import bcrypt
 from flask_restful import fields
-import bcrypt
 from database import db
 
 class UserProfile(db.Model):
