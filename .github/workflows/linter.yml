@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #check out repository
+      # Check out repository.
       - uses: actions/checkout@v3
       
-      #set up Python
+      # Set up Python.
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
