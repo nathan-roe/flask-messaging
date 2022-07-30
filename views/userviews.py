@@ -40,7 +40,6 @@ class VerifyEmail(Resource):
             return Response(status=400)
 
 
-
 class ResendVerifyEmail(Resource):
 
     def post(self):
@@ -54,7 +53,6 @@ class ResendVerifyEmail(Resource):
             return Response(status=200)
         except ValueError:
             return Response(status=400)
-
 
 
 class SignIn(Resource):

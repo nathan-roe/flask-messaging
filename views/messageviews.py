@@ -2,10 +2,11 @@ from flask import Response, request
 from flask_restful import Resource
 from models.userprofile import UserProfile
 from service.authentication import token_to_userprofile
-from controller.messagecontroller import retrieve_messages, send_message, send_message_request, update_message_request
+from controller.messagecontroller import retrieve_messages, send_message, \
+    send_message_request, update_message_request
 
 
-class MessageRequestsRequest(Resource):
+class SendMessageRequest(Resource):
 
     def post(self, id):
         try:
